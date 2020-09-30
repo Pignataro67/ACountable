@@ -1,0 +1,69 @@
+body {
+  background-color: #edf5fc
+}
+.App {
+  text-align: left;
+  width: 300px;
+  height: 90vh;
+  margin: auto;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.react-countdown-clock {
+  margin-top: 20px;
+  display: block;
+  margin-left: 20px;
+}
+
+.timer {
+  background-color: gray;
+  display: inline-block;
+}
+
+.calendar{
+  width: 300px;
+  margin: 10px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* @media only screen (max-width: 768px){
+
+}
+
+@media only screen (max-width: 1024px){
+
+}	
+
+@media only screen (max-width: 1200px){
+
+} */
