@@ -21,6 +21,15 @@ body {
   display: inline-block;
 }
 
+.timer button {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden {
+  display: none;
+}
+
 .calendar{
   width: 300px;
   margin: 10px;
