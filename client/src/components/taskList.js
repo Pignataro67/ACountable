@@ -1,22 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-class TaskList extends Component {
+const TaskList = props => {
 
-  constructor() {
-    super()
-    this.state = {
-      allSessions: []
-    }
+  const addTasks = () => {
+    return props.tasks.map(task => {
+      return <li>{task.title}</li>
+    })
   }
 
-  render() {
     return (
       <div>
 
       </div>
     )
   }
-}
 
 export default TaskList;
