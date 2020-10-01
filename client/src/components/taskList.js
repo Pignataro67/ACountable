@@ -10,8 +10,14 @@ const TaskList = props => {
   }
 
     return (
-      <div>
-
+      <div className="comp">
+          <form>
+          <input type="text" name="taskInput" />
+          <input type="submit" value="Add"/>
+        </form>
+        <ul>
+          {addTasks()}
+        </ul>
       </div>
     )
   }
