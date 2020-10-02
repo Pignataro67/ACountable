@@ -17,6 +17,23 @@ class App extends Component {
       currentTasks: []
       }
     }
+    
+    sendTime = () => {
+      let currentDate = new Date();
+      let date = currentDate.toString();
+      date = date.split(" (")[0]
+      // debugger;
+      fetch(`http://localhost:3001/work_sessions/${this.state.currentSession.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          start_time: date
+        })
+      })
+    }
 
     componentDidMount() {
 
