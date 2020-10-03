@@ -156,10 +156,21 @@ class App extends Component {
       getOpenTasks();
     };
 
+    const stateNewTask = newTask => {
+      this.setState({
+        currentTasks: [
+          newTask,
+          ...this.state.currentTasks
+        ]
+      })
+    }
+
+ }
+
   render() {
     return (
       <div className="App">
-        <UserHomepage appState={this.state}/>
+        <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask}/>
       </div>
     );
   }
