@@ -7,7 +7,7 @@ note = () =>  {
       <form>
         <textarea placeholder="Please write some notes about how you spent your time">
 
-        </textarea>
+        </textarea placeholder="Please write some notes about how you spent your time">
       </form>
     </Fragment>
   )

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import task from './workSessionComponent/task'
-
+import React, { Component } from 'react';
+import task from './workSessionComponent/task';
+import task from './workSessionComponents/task';
 class WorkSession extends Component {
 
   render() {
