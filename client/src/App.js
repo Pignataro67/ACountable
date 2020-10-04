@@ -18,6 +18,10 @@ class App extends Component {
       }
     }
     
+    deleteTask = task => {
+      console.log("delete button", task)
+    }
+
     sendTime = () => {
       let currentDate = new Date();
       let date = currentDate.toString();
@@ -34,6 +38,10 @@ class App extends Component {
         })
       })
     }
+
+    const input = e.target[0].value;
+
+
 
     componentDidMount() {
 
@@ -101,6 +109,9 @@ class App extends Component {
       filterCurrentTasks(tasks);
       getAllTasks(tasks);
     })
+
+    <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask}
+    deleteTask={this.deleteTask}/>
 
     const filterCurrentTasks = tasks => {
 
