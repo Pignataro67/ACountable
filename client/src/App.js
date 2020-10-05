@@ -78,6 +78,14 @@ class App extends Component {
       }
     }
 
+    render() {
+      return (
+        <div className="App">
+          <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask} deleteTask={this.deleteTask}/>
+        </div>
+      );
+    }
+
     const input = e.target[0].value;
 
     componentDidMount() {
@@ -220,24 +228,6 @@ class App extends Component {
     .then(newTask => stateNewTask(newTask) )
 
     e.target[0].value = ""
-
-    const stateNewTask = newTask => {
-      this.setState({
-        currentTasks: [
-          newTask,
-          ...this.state.currentTasks
-        ]
-      })
-    }
-
- }
-
-  render() {
-    return (
-      <div className="App">
-        <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask}/>
-      </div>
-    );
   }
 }
 
