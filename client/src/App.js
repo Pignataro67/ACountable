@@ -63,8 +63,17 @@ class App extends Component {
         .then(newTask => stateNewTask(newTask) )
   
         e.target[0].value = ""
+
+        const stateNewTask = newTask => {
+          this.setState({
+            currentTasks: [
+              newTask,
+              ...this.state.currentTasks
+            ]
+          })
+       }
   
-      } else{
+      } else {
           console.log("error")
       }
     }
