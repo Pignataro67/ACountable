@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import UserHomepage from './Components/userHomepage';
-import Timer from './Components/timer';
+// import Timer from './Components/timer';
 
 class App extends Component {
   constructor () {
@@ -26,7 +26,7 @@ class App extends Component {
       let currentDate = new Date();
       let date = currentDate.toString();
       date = date.split(" (")[0]
-      // debugger;
+      
       fetch(`http://localhost:3001/work_sessions/${this.state.currentSession.id}`, {
         method: "PATCH",
         headers: {
@@ -38,10 +38,38 @@ class App extends Component {
         })
       })
     }
+    
+    addATask = (e) => {
+      debugger;
+      e.preventDefault()
+      e.persist()
+      const input = e.target[0].value;
+      console.log(e.target[0].value)
+  
+      if (input.length > 0) {
+        fetch("http://localhost:3001/tasks", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            status: "open",
+            title: input,
+            work_session_id: this.state.currentSession.id
+          })
+        })
+        .then(resp => resp.json())
+        .then(newTask => stateNewTask(newTask) )
+  
+        e.target[0].value = ""
+  
+      } else{
+          console.log("error")
+      }
+    }
 
     const input = e.target[0].value;
-
-
 
     componentDidMount() {
 
