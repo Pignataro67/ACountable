@@ -86,8 +86,6 @@ class App extends Component {
       );
     }
 
-    const input = e.target[0].value;
-
     componentDidMount() {
 
       fetch("http://localhost:3001/work_sessions")
@@ -100,7 +98,6 @@ class App extends Component {
         })
 
         this.setState({
-          ...this.state,
           workSessions: sessions
         }, ()=> {getCurrentSession()})
       }
@@ -109,8 +106,6 @@ class App extends Component {
         if (this.state.currentSession.length === 0) {
   
           const lastSession = this.state.workSessions[this.state.workSessions.length - 1]
-  
-          // console.log(this.state.workSessions)
   
           if (lastSession.start_time === ""){
   
@@ -155,15 +150,12 @@ class App extends Component {
       getAllTasks(tasks);
     })
 
-    <UserHomepage appState={this.state} sendTime={this.sendTime} addATask={this.addATask}
-    deleteTask={this.deleteTask}/>
-
     const filterCurrentTasks = tasks => {
 
       const currentTasks = tasks.filter(task => {
         return task.work_session_id === this.state.currentSession.id
       })
-      // console.log(currentTasks)
+      
       this.setState({
         ...this.state,
         currentTasks: currentTasks
@@ -176,59 +168,39 @@ class App extends Component {
         allTasks: tasks
       })
     }
+  }
+
+  componentDidUpdate() {
+
+    const getOpenTasks = () => {
+      fetch("http://localhost:3001/tasks")
+      .then(res => res.json())
+      .then(data => filterOpenTasks(data))
+    }
+  
+    const filterOpenTasks = tasks => {
+      const openTasks = tasks.filter(task => {
+        return task.status === "open"
+      })
+      reassignWS(openTasks)
     }
 
-    componentDidUpdate() {
-
-      const getOpenTasks = () => {
-        fetch("http://localhost:3001/tasks")
-        .then(res => res.json())
-        .then(data => filterOpenTasks(data))
-      }
-  
-      const filterOpenTasks = tasks => {
-        const openTasks = tasks.filter(task => {
-          return task.status === "open"
-  
-          reassignWS(openTasks)
-        })
-      }
-
-      const reassignWS = openTasks => {
-        openTasks.map(task => {
-          fetch(`http://localhost:3001/tasks/${task.id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            },
-            body: JSON.stringify({
-              work_session_id: this.state.currentSession.id
-            })
+    const reassignWS = openTasks => {
+      openTasks.map(task => {
+        fetch(`http://localhost:3001/tasks/${task.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            work_session_id: this.state.currentSession.id
           })
         })
-      }
-
-      getOpenTasks();
-    };
-
-    fetch("http://localhost:3001/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        status: "open",
-        title: e.target[0].value,
-        work_session_id: this.state.currentSession.id
       })
-    })
-    .then(resp => resp.json())
-    .then(newTask => stateNewTask(newTask) )
-
-    e.target[0].value = ""
-  }
+    }
+    getOpenTasks();
+  };
 }
 
 export default App;
