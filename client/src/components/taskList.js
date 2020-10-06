@@ -5,7 +5,12 @@ const TaskList = props => {
 
   const addTasks = () => {
     return props.tasks.map(task => {
-      return <li>{task.title}</li>
+      return <li key={idx}>
+
+      {task.title}
+      <button className="delete-button" name="delete-button" onClick={()=> props.deleteTask(task)}>X</button>
+      <button className="edit-button" name="edit-button">E</button>
+      </li>
     })
   }
 
